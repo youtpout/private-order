@@ -16,9 +16,11 @@ impl Order {
         bid_token: AztecAddress,
         ask_token: AztecAddress,
     ) -> Self {
-        assert(bid_amount > 0 as u128, "ZERO_BID_AMOUNT");
-        assert(ask_amount > 0 as u128, "ZERO_ASK_AMOUNT");
-        assert(bid_token != ask_token, "SAME_TOKEN");
+        assert(bid_amount > 0 as u128, "Bid can't be zero");
+        assert(ask_amount > 0 as u128, "Ask can't be zero");
+        assert(bid_token != AztecAddress::default(), "Bid token can't be zero");
+        assert(ask_token != AztecAddress::default(), "Ask token can't be zero");
+        assert(bid_token != ask_token, "Same token address for bid and ask");
 
         Self { bid_amount, ask_amount, bid_token, ask_token }
     }
